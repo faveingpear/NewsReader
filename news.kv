@@ -1,0 +1,67 @@
+<LoginScreen>
+    BoxLayout:
+        orientation: 'vertical'
+
+        TextInput:
+            id: url_input
+            size_hint_y: None
+            size_hint_x: None
+            height: 30
+            width: 150
+            multiline: False
+
+        TextInput:
+            id: username_input
+            size_hint_y: None
+            size_hint_x: None
+            height: 30
+            width: 150
+            multiline: False
+
+        TextInput:
+            id: password_input
+            size_hint_y: None
+            size_hint_x: None
+            height: 30
+            width: 150
+            multiline: False
+
+        Button:
+            text: "Login"
+            size_hint_y: None
+            size_hint_x: None
+            height: 30
+            width: 80
+            multiline: False
+            on_press: root.login()
+<MainScreen>
+    Button:
+        text: "Screen Three"
+
+<SettingsScreen>
+    Button:
+        text: "Screen one"
+
+
+
+<Manager>
+    id: screen_manager
+
+    screen_one: screen_one
+    screen_two: screen_two
+    screen_three: screen_three
+
+    LoginScreen:
+        id: screen_one
+        name: 'Login'
+        manager: screen_manager
+
+    MainScreen:
+        id: screen_two
+        name: 'Main'
+        manager: screen_manager
+
+    SettingsScreen:
+        id: screen_three
+        name: 'Settings'
+        manager: screen_manager
