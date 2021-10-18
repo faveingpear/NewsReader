@@ -48,7 +48,7 @@ class LoginScreen(Screen):
         username = username_input.text
         password = password_input.text
 
-        logging.info("NewsApp: url = " + url + " Username: " + username)
+        logging.info("NewsApp: url: " + url + " Username: " + username)
 
         News.auth(nextcloudUrl=url, username=username, password=password)
         
@@ -66,6 +66,6 @@ class NewsApp(App):
 if __name__ == "__main__":
     logging.basicConfig(filename='News.log', encoding='utf-8', level=logging.DEBUG)
 
-    News = NextcloudNewsApi()
+    News = NextcloudNewsApi(appName="NewsApi")
 
     NewsApp().run()
