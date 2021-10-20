@@ -14,21 +14,19 @@ from kivy.properties import ObjectProperty
 
 import logging
 import random
+import json
 
 from NextCloudNewsAPI.api import NextcloudNewsApi
 
-# class ScatterTextWidget(BoxLayout):
+sm = None
 
-#     text_color = ListProperty([1,0,0,1])
+class database():
 
-#     def add_text(self):
-#         logging.info("add_text")
-#         root = self.ids['float']
-#         root.add_widget(Label(text="Test",color=self.text_color))
-    
-#     def change_label_color(self, *args):
-#         color = [random.random() for i in range(3)] +[1]
-#         self.text_color = color
+    def __init__(self) -> None:
+        pass
+
+    def parseJson(self, json):
+        pass
 
 class SettingsScreen(Screen):
     pass
@@ -50,7 +48,9 @@ class LoginScreen(Screen):
 
         logging.info("NewsApp: url: " + url + " Username: " + username)
 
-        News.auth(nextcloudUrl=url, username=username, password=password)
+        if News.auth(nextcloudUrl=url, username=username, password=password):
+            sm.current = "Main"
+            
         
 
 
@@ -60,8 +60,11 @@ class Manager(ScreenManager):
     screen_three = ObjectProperty(None)
 
 class NewsApp(App):
+
     def build(self):   
-        return Manager()
+        global sm # God help me
+        sm = Manager()
+        return sm
 
 if __name__ == "__main__":
     logging.basicConfig(filename='News.log', encoding='utf-8', level=logging.DEBUG)
