@@ -16,23 +16,22 @@ import logging
 import random
 import json
 
+from database.database import database
+
 from NextCloudNewsAPI.api import NextcloudNewsApi
 
 sm = None
-
-class database():
-
-    def __init__(self) -> None:
-        pass
-
-    def parseJson(self, json):
-        pass
 
 class SettingsScreen(Screen):
     pass
 
 class MainScreen(Screen):
-    pass
+
+    def sync(self):
+        folders = News.getFolders()
+        
+        for folder in folders["folders"]:
+            data.addFolder(id=int(folder['id']),name=folder['name'])
 
 class LoginScreen(Screen):
     
@@ -70,5 +69,7 @@ if __name__ == "__main__":
     logging.basicConfig(filename='News.log', encoding='utf-8', level=logging.DEBUG)
 
     News = NextcloudNewsApi(appName="NewsApi")
+
+    data = database()
 
     NewsApp().run()
